@@ -4,7 +4,7 @@
 # EXAMPLE
 # Input : "Mr John Smith    ", 13
 # Output : "Mr%20John%20Smith"
-
+import unittest
 
 input = list("Mr John Smith    ")
 size = 13
@@ -19,6 +19,8 @@ def urlify(input, size):
             output_size += pattern_size_delta
     if output_size == size:
         return input
+    if output_size > len(input):
+        raise ValueError("input is not sufficiently large for the replaced version")
     new_index = output_size - 1
     old_index = size - 1
     while(new_index >= 0 and old_index >= 0):
@@ -34,4 +36,17 @@ def urlify(input, size):
     assert new_index == old_index == -1
     return input
 
-assert urlify(input, size) == list("Mr%20John%20Smith")
+
+def urlify_wrapper(string):
+    return "".join(urlify(list(string), len(string.strip())))
+
+
+class DemoTestCase(unittest.TestCase):
+    def test_urlify(self):
+        self.assertRaises(ValueError, lambda: urlify_wrapper("Mr John Smith   "))
+        self.assertEqual(urlify_wrapper("Mr John Smith    "), "Mr%20John%20Smith")
+        self.assertRaises(ValueError, lambda: urlify(list("Mr John Smith    "), 14))
+        self.assertEqual("".join(urlify(list("Mr John Smith       "), 14)), "Mr%20John%20Smith%20")
+
+
+unittest.main()
