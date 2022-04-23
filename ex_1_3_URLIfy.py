@@ -49,4 +49,4 @@ class DemoTestCase(unittest.TestCase):
         self.assertEqual("".join(urlify(list("Mr John Smith       "), 14)), "Mr%20John%20Smith%20")
 
 
-unittest.main()
+unittest.main(argv=['first-arg-is-ignored'], exit=False)
