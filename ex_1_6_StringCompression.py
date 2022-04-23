@@ -9,13 +9,13 @@ def compression(string):
     compressed_index = 0
     if len(string) <= 2: ## only useful to compress if we have 3-letter string
         return string
-    for i in range(1, len(string) + 1):
+    for i in range(1, len(string) + 1): # One more element to to add the latest element in the string
         if i < len(string) and string[i] == string[i-1]:
             successive_counter += 1
         else:
             compressed[compressed_index] = string[i-1]
             compressed_index += 1
-            if successive_counter > 1:
+            if successive_counter > 1: # if it's 1, just put the char and nothing more
                 for digit in str(successive_counter):
                     compressed[compressed_index] = digit
                     compressed_index += 1
