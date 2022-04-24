@@ -30,10 +30,28 @@ def get_kth_to_last_2(linkedlist: Node, kth):
         n2 = n2.next
     return n1.data
 
+def get_kth_to_last_rec(linkedlist: Node, kth):
+
+    def get_kth_to_last_rec_wrapper(linkedlist, kth):
+        if linkedlist.next is None:
+            if kth == 0:
+                return (linkedlist.data, 0)
+            else:
+                return (None, 0)
+        else:
+            rec_call = get_kth_to_last_rec_wrapper(linkedlist.next, kth)
+            if rec_call[1]+1 == kth:
+                return linkedlist.data, rec_call[1]+1
+            elif rec_call[0] is not None:
+                return rec_call
+            else:
+                return None, rec_call[1] + 1
+
+    return get_kth_to_last_rec_wrapper(linkedlist, kth)[0]
 
 linkedlist = Node(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-print(get_kth_to_last_2(linkedlist, 0))
-print(get_kth_to_last_2(linkedlist, 1))
-print(get_kth_to_last_2(linkedlist, 2))
-print(get_kth_to_last_2(linkedlist, 3))
-print(get_kth_to_last_2(linkedlist, 4))
+print(get_kth_to_last_rec(linkedlist, 0))
+print(get_kth_to_last_rec(linkedlist, 1))
+print(get_kth_to_last_rec(linkedlist, 2))
+print(get_kth_to_last_rec(linkedlist, 3))
+print(get_kth_to_last_rec(linkedlist, 4))
