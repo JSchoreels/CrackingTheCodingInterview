@@ -5,11 +5,12 @@ from Chapter_2_LinkedLists.Node import Node, SortedList, SortedSet
 def remove_duplicates_with_hashset(head: Node):
     node = head
     already_met = set()
+    already_met.add(head.data)
     while node.next != None :
-        already_met.add(node.data)
         if node.next.data in already_met:
             node.next = node.next.next
         else: # Only move forward if we didn't met a duplicate, because the next element might also be one
+            already_met.add(node.next.data)
             node = node.next
 
 def remove_duplicates(head: Node):
