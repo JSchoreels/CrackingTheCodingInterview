@@ -1,9 +1,18 @@
 from __future__ import annotations
 
 
+class LinkedList:
+
+    def __init__(self, head: Node = None):
+        self.head = head
+
+    def __repr__(self):
+        return self.head.__repr__()
+
+
 class Node:
 
-    def __init__(self, data, *args):
+    def __init__(self, data = None, *args):
         self.data = data
         self.next: Node = None
         n = self
@@ -18,7 +27,7 @@ class Node:
 
 class SortedList:
 
-    def __init__(self, data, *args):
+    def __init__(self, data=None, *args):
         self.data = data
         self.next: SortedList = None
         n = self
@@ -36,7 +45,7 @@ class SortedList:
 
 class SortedSet(Node):
 
-    def __init__(self, data, *args):
+    def __init__(self, data = None, *args):
         self.data = data
         self.next: SortedList = None
         for node in args:

@@ -5,26 +5,41 @@
 # EXAMPLE
 # Input:3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1 [partition= 5]
 # Output:3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
-from Chapter_2_LinkedLists.Node import Node
+from Chapter_2_LinkedLists.Node import Node, LinkedList
 
-llist = Node(9,1,2,7)
 
-def partition(head: Node, x: int):
-    n = head
-    end = head
-    while end.next is not None:
-        end = end.next
-    initial_end = end
-    while n != initial_end:
-        if n.next.data < x:
-            n = n.next
+def partition(list: LinkedList, x: int):
+    lessers_head = None
+    greaters_head = None
+    lessers_tail = None
+    greaters_tail = None
+    n = list.head
+    while n is not None:
+        selected = n
+        n = n.next
+        selected.next = None
+        if selected.data < x:
+            lessers_head, lessers_tail = appendAndReturnNewHeadAndTail(lessers_head, lessers_tail, selected)
         else:
-            if n.next != initial_end:
-                next = n.next
-                n.next = n.next.next
-                end.next = next
-                end = end.next
-                end.next = None
+            greaters_head, greaters_tail = appendAndReturnNewHeadAndTail(greaters_head, greaters_tail, selected)
+    if lessers_head is not None:
+        list.head = lessers_head
+        lessers_tail.next = greaters_head
+    else:
+        list.head = greaters_head
 
-partition(llist,5)
-print(llist)
+def appendAndReturnNewHeadAndTail(head, tail, selected):
+    if head is None:
+        head = selected
+        tail = head
+    else:
+        tail.next = selected
+        tail = selected
+    return head, tail
+
+
+if __name__ == "__main__":
+    linked_list = LinkedList(head=Node(1, 9, 1, 2, 7))
+    partition(linked_list, 5)
+
+    print(linked_list)
