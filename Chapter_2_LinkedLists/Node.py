@@ -41,7 +41,7 @@ class Node:
         return f"{self.data} -> {self.next}"
 
     def __eq__(self, other: Node):
-        return self.data == other.data and self.next == other.next
+        return other is not None and self.data == other.data and self.next == other.next
 
     def __sizeof__(self):
         size = 0
@@ -49,6 +49,7 @@ class Node:
         while n is not None:
             size += 1
             n = n.next
+        return size
 
 class SortedList:
 
