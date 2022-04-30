@@ -3,11 +3,27 @@ from __future__ import annotations
 
 class LinkedList:
 
-    def __init__(self, head: Node = None):
-        self.head = head
+    head: Node
+
+    def __init__(self, *args):
+        if len(args) != 0:
+            self.head = Node(*args)
+        else:
+            self.head = None
+
+    def insert_first(self, data):
+        new_head = Node(data)
+        new_head.next = self.head
+        self.head = new_head
 
     def __repr__(self):
         return self.head.__repr__()
+
+    def __eq__(self, other):
+        return self.head == other.head
+
+    def __sizeof__(self):
+        return self.head.__sizeof__()
 
 
 class Node:
@@ -24,6 +40,15 @@ class Node:
     def __repr__(self):
         return f"{self.data} -> {self.next}"
 
+    def __eq__(self, other: Node):
+        return self.data == other.data and self.next == other.next
+
+    def __sizeof__(self):
+        size = 0
+        n = self
+        while n is not None:
+            size += 1
+            n = n.next
 
 class SortedList:
 

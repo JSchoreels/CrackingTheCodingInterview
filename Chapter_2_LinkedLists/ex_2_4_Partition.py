@@ -39,7 +39,7 @@ def appendAndReturnNewHeadAndTail(head, tail, selected):
 
 
 if __name__ == "__main__":
-    linked_list = LinkedList(head=Node(1, 9, 1, 2, 7))
+    linked_list = LinkedList(1, 9, 1, 2, 7)
     partition(linked_list, 5)
 
     print(linked_list)
