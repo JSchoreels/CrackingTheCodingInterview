@@ -30,10 +30,32 @@ def sum(l1 : LinkedList, l2 : LinkedList) -> LinkedList:
         n2 = n2.next if n2 else None
     return l_output
 
+def sum_reverse(l1 : LinkedList, l2 : LinkedList) -> LinkedList:
+    reverse(l1)
+    reverse(l2)
+    result = sum(l1, l2)
+    reverse(result)
+    return result
+
+
+def reverse(l: LinkedList) -> None:
+    n = l.head
+    prev = None
+    while n is not None:
+        n_next = n.next
+        n.next = prev
+        prev = n
+        n = n_next
+    l.head = prev
+
 class TestStringMethods(unittest.TestCase):
     def test_sum_samesize(self):
         self.assertEqual(LinkedList(2,1,9), sum(LinkedList(7, 1, 6), LinkedList(5,9,2)))
         self.assertEqual(LinkedList(8,1), sum(LinkedList(9), LinkedList(9)))
+
+    def test_sum_samesize_reverse(self):
+        self.assertEqual(LinkedList(9,1,2), sum_reverse(LinkedList(6,1,7), LinkedList(2,9,5)))
+        self.assertEqual(LinkedList(1,8), sum_reverse(LinkedList(9), LinkedList(9)))
 
     def test_sum_different_size(self):
         self.assertEqual(LinkedList(2,1,9,1,1), sum(LinkedList(7,1,6,1,1), LinkedList(5,9,2)))
@@ -42,6 +64,9 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(LinkedList(2,1,9,1,1), sum(LinkedList(5,9,2), LinkedList(7,1,6,1,1)))
         self.assertEqual(LinkedList(8,2), sum(LinkedList(9), LinkedList(9,1)))
         self.assertEqual(LinkedList(8,0,1), sum(LinkedList(9), LinkedList(9,9)))
+
+    def test_sum_different_size_reverse(self):
+        self.assertEqual(LinkedList(1,1,9,1,2), sum_reverse(LinkedList(1,1,6,1,7), LinkedList(2,9,5)))
 
 if __name__ == '__main__':
     unittest.main()
