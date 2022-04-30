@@ -28,11 +28,17 @@ def sum(l1 : LinkedList, l2 : LinkedList) -> LinkedList:
             l_output_tail = new_output_node
         n1 = n1.next
         n2 = n2.next
+    if carry > 0:
+        new_output_node = Node(carry)
+        l_output_tail.next = new_output_node
+        l_output_tail = new_output_node
     return l_output
 
 class TestStringMethods(unittest.TestCase):
     def test_sum_samesize(self):
         self.assertEqual(LinkedList(2,1,9), sum(LinkedList(7, 1, 6), LinkedList(5,9,2)))
+        self.assertEqual(LinkedList(8,1), sum(LinkedList(9), LinkedList(9)))
+
 
 if __name__ == '__main__':
     unittest.main()
