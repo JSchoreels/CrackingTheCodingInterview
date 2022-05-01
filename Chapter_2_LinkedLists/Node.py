@@ -16,14 +16,20 @@ class LinkedList:
         new_head.next = self.head
         self.head = new_head
 
+    def append(self, node: Node):
+        n = self.head
+        while n.next is not None:
+            n = n.next
+        n.next = node
+
     def __repr__(self):
         return self.head.__repr__()
 
     def __eq__(self, other):
         return self.head == other.head
 
-    def __sizeof__(self):
-        return self.head.__sizeof__()
+    def __len__(self):
+        return self.head.__len__()
 
 
 class Node:
@@ -43,7 +49,7 @@ class Node:
     def __eq__(self, other: Node):
         return other is not None and self.data == other.data and self.next == other.next
 
-    def __sizeof__(self):
+    def __len__(self):
         size = 0
         n = self
         while n is not None:

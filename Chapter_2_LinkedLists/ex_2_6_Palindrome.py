@@ -5,7 +5,7 @@ from Chapter_2_LinkedLists.Node import LinkedList
 
 
 def is_palindrome(l : LinkedList):
-    l_size = size(l)
+    l_size = len(l)
     prev = None
     n = l.head
     for i in range(l_size//2): # for 3//2=1 -> i in [0], 1->2->3 become x<-1|2->3. for 4//2=2 -> i in [0,1] so 1->2->3->4 become x<-1<-2|3->4
@@ -33,15 +33,6 @@ def is_palindrome(l : LinkedList):
     return is_palindrome
 
 
-
-
-def size(l : LinkedList) -> int:
-    size = 0
-    n = l.head
-    while n is not None:
-        size += 1
-        n = n.next
-    return size
 
 
 class TestStringMethods(unittest.TestCase):
