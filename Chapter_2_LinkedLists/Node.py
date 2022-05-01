@@ -51,6 +51,17 @@ class Node:
             n = n.next
         return size
 
+    def reverse(self) -> None:
+        n = self.head
+        prev = None
+        while n is not None:
+            n_next = n.next
+            n.next = prev
+            prev = n
+            n = n_next
+        self.head = prev
+
+
 class SortedList:
 
     def __init__(self, data=None, *args):
