@@ -26,3 +26,6 @@ class Stack:
         if self.head:
             self.head = self.head.next
         return value
+
+    def __repr__(self):
+        return f'S[{self.head}]'
