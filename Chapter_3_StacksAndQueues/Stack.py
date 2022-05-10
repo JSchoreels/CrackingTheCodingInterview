@@ -1,15 +1,7 @@
 import unittest
 from unittest import TestCase
 
-
-class Node:
-
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-    def __repr__(self):
-        return f"{self.data} -> {self.next}"
+from Chapter_3_StacksAndQueues.Node import Node
 
 
 class Stack:
