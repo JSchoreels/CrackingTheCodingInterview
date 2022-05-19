@@ -29,9 +29,9 @@ class TreeTestCase(TestCase):
         tab = [i for i in range(20)]
         tree = minimal_tree(tab)
         graph = tree.to_graph()
-        print(graph.edges)
-        print(graph.nodes)
         graph.display(draw_func=lambda x : x.draw)
+        self.assertEqual(5, tree.height())
+        self.assertTrue(tree.is_sorted())
 
 if __name__ == '__main__':
     unittest.main()
