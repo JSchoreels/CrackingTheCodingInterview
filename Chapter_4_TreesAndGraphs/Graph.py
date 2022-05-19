@@ -51,7 +51,7 @@ class Graph:
             if mark_origin_of_edge:
                 self.nodes[source][status] = True
 
-    def display(self, draw_func = lambda g: g.draw_planar):
+    def display(self, draw_func = lambda g: g.draw):
         graph = nx.DiGraph(self.edges)
         labels = {id: id for id in self.nodes}
         pos = graphviz_layout(graph, prog="dot")

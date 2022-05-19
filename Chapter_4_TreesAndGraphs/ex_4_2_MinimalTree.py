@@ -6,7 +6,7 @@ from unittest import TestCase
 
 from Chapter_4_TreesAndGraphs.BinaryTree import BinaryTree
 
-def minimal_tree(array):
+def minimal_tree_leftperfect(array):
     def minimal_tree(array, start, end):
         if start == end:
             return BinaryTree(array[start])
@@ -22,6 +22,30 @@ def minimal_tree(array):
             tree.right = minimal_tree(array, start + middle_element_index+1, end)
             return tree
     return minimal_tree(array, 0, len(array)-1)
+
+def minimal_tree(array):
+    def minimal_tree(array, start, end):
+        if start == end:
+            return BinaryTree(array[start])
+        elif start > end:
+            return None
+        else:
+            total_element = end - start + 1
+            middle_element_index = start + total_element // 2
+            tree = BinaryTree(array[middle_element_index])
+            tree.left = minimal_tree(array, start, middle_element_index-1)
+            tree.right = minimal_tree(array, middle_element_index+1, end)
+            return tree
+    return minimal_tree(array, 0, len(array)-1)
+
+def minimal_tree_perfect(array):
+    current_level = [BinaryTree(array[0])]
+    parent_level = []
+    while len(current_level) > 0 :
+        current_tree = current_level.pop(0)
+        parent_level.append(current_tree)
+        current_tree
+
 
 
 class TreeTestCase(TestCase):
