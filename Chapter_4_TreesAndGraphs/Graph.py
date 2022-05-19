@@ -1,6 +1,8 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import pydot
+from networkx.drawing.nx_pydot import graphviz_layout
 
 
 class Graph:
@@ -49,14 +51,15 @@ class Graph:
             if mark_origin_of_edge:
                 self.nodes[source][status] = True
 
-    def display(self):
+    def display(self, draw_func = lambda g: g.draw_planar):
         graph = nx.DiGraph(self.edges)
         labels = {id: id for id in self.nodes}
-        nx.draw_planar(graph,labels=labels, node_color="tab:blue", font_color="whitesmoke")
+        pos = graphviz_layout(graph, prog="dot")
+        draw_func(nx)(graph,pos,labels=labels, node_color="tab:blue", font_color="whitesmoke")
         for color, status in [('tab:red', 'visited'),('tab:green','matched')]:
             nodes = [node for node in self.nodes if self.nodes[node].get(status)]
             edges = [ (src,dest) for src in self.edges.keys() for dest in self.edges[src].keys() if self.edges[src][dest].get(status, False)]
-            nx.draw_planar(graph, nodelist=nodes, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
+            draw_func(nx)(graph, pos, nodelist=nodes, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
         plt.show()
 
 
