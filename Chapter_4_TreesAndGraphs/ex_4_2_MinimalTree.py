@@ -55,7 +55,7 @@ class TreeTestCase(TestCase):
         graph = tree.to_graph()
         graph.display(draw_func=lambda x : x.draw)
         self.assertEqual(5, tree.height())
-        self.assertTrue(tree.is_sorted())
+        self.assertTrue(tree.is_bst())
 
 if __name__ == '__main__':
     unittest.main()

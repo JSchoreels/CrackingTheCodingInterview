@@ -25,7 +25,19 @@ class BinaryTree:
         right_height = self.right.height() if self.right else 0
         return max(left_height, right_height) + 1
 
-    def is_sorted(self):
-        left_sorted = self.left.is_sorted() and self.left.data < self.data if self.left else True
-        right_sorted = self.right.is_sorted() and self.right.data > self.data if self.right else True
-        return left_sorted and right_sorted
+    def is_bst(self):
+        def is_bst_and_get_minmax(tree: BinaryTree):
+            if tree is None:
+                return True, None, None
+            else:
+                left_valid, left_min, left_max = is_bst_and_get_minmax(tree.left)
+                if not left_valid:
+                    return False, None, None
+                right_valid, right_min, right_max = is_bst_and_get_minmax(tree.right)
+                if not right_valid:
+                    return False, None, None
+                if (left_max is None or left_max < tree.data) and (right_min is None or right_min > tree.data):
+                    return True, left_min if left_min else tree.data, right_max if right_max else tree.data
+                else:
+                    return False, None, None
+        return is_bst_and_get_minmax(self)[0]
