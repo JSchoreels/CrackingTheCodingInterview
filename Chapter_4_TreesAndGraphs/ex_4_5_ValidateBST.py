@@ -8,6 +8,7 @@ from Chapter_4_TreesAndGraphs.ex_4_2_MinimalTree import minimal_tree
 
 
 def validate_bst(tree: BinaryTree):
+    if tree is None: return True
     return tree.is_bst()
 
 class TestCase(unittest.TestCase):
@@ -26,3 +27,8 @@ class TestCase(unittest.TestCase):
        tree.right = BinaryTree(30)
        tree.to_graph().display()
        self.assertFalse(validate_bst(tree))
+
+
+    def test_null(self):
+       self.assertTrue(validate_bst(None))
+       self.assertTrue(validate_bst(BinaryTree(2)))
