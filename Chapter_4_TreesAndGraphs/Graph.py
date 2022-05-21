@@ -63,6 +63,7 @@ class Graph:
             nodes = [node for node in self.nodes if self.nodes[node].get(status)]
             edges = [ (src,dest) for src in self.edges.keys() for dest in self.edges[src].keys() if self.edges[src][dest].get(status, False)]
             draw_func(nx)(graph, pos, nodelist=nodes, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
+        plt.show()
 
 
     def reset_status(self, status):

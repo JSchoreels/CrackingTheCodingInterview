@@ -4,7 +4,7 @@
 import unittest
 from queue import Queue
 
-from Chapter_4_TreesAndGraphs.Graph import Graph
+from Graph import Graph
 
 def route(graph: Graph, S, E):
     graph.reset_markings()
