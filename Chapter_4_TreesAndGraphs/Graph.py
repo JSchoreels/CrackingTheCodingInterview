@@ -1,3 +1,4 @@
+import matplotlib
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -8,9 +9,9 @@ from networkx.drawing.nx_pydot import graphviz_layout
 class Graph:
 
     def __init__(self):
-        self.nodes = {}
-        self.edges = {}
-        self.reversed_edges = {}
+        self.nodes: map = {}
+        self.edges: map = {}
+        self.reversed_edges: map = {}
 
 
     def add_nodes(self, *nodes):
@@ -52,6 +53,7 @@ class Graph:
                 self.nodes[source][status] = True
 
     def display(self, draw_func = lambda g: g.draw):
+        plt.clf()
         graph = nx.DiGraph(self.edges)
         pos = graphviz_layout(graph, prog="dot")
         nodes = [node for node in self.nodes if "None" not in str(node)]
@@ -61,7 +63,6 @@ class Graph:
             nodes = [node for node in self.nodes if self.nodes[node].get(status)]
             edges = [ (src,dest) for src in self.edges.keys() for dest in self.edges[src].keys() if self.edges[src][dest].get(status, False)]
             draw_func(nx)(graph, pos, nodelist=nodes, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
-        plt.show()
 
 
     def reset_status(self, status):
