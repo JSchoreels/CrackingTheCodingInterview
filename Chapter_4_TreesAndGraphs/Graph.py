@@ -53,9 +53,10 @@ class Graph:
 
     def display(self, draw_func = lambda g: g.draw):
         graph = nx.DiGraph(self.edges)
-        labels = {id: id for id in self.nodes}
         pos = graphviz_layout(graph, prog="dot")
-        draw_func(nx)(graph,pos,labels=labels, node_color="tab:blue", font_color="whitesmoke")
+        nodes = [node for node in self.nodes if "None" not in str(node)]
+        labels = {id: id for id in nodes}
+        draw_func(nx)(graph,pos, nodelist=nodes, labels=labels, node_color="tab:blue", font_color="whitesmoke")
         for color, status in [('tab:red', 'visited'),('tab:green','matched')]:
             nodes = [node for node in self.nodes if self.nodes[node].get(status)]
             edges = [ (src,dest) for src in self.edges.keys() for dest in self.edges[src].keys() if self.edges[src][dest].get(status, False)]

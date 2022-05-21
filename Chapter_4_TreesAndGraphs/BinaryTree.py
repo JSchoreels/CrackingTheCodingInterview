@@ -14,9 +14,13 @@ class BinaryTree:
             if tree.left is not None:
                 graph.add_edges((tree.data, tree.left.data))
                 add_tree_to_graph(tree.left, graph)
+            else:
+                graph.add_edges((tree.data, f"None.{tree.data}.L"))
             if tree.right is not None:
                 graph.add_edges((tree.data, tree.right.data))
                 add_tree_to_graph(tree.right, graph)
+            else:
+                graph.add_edges((tree.data, f"None.{tree.data}.R"))
             return graph
         return add_tree_to_graph(self, graph)
 
