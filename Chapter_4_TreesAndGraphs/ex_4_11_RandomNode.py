@@ -46,10 +46,12 @@ class BinarySearchTree(BinaryTree.BinaryTree):
             if self.left is None:
                 raise ValueError("Element no found")
             self.left = self.left.delete_node(data)
+            return self
         elif data > self.data:
             if self.right is None:
                 raise ValueError("Element no found")
             self.right = self.right.delete_node(data)
+            return self
         elif data == self.data:
             if self.left is None and self.right is None:
                 return None
@@ -77,4 +79,5 @@ class TestCase(unittest.TestCase):
             bst.insert(elem)
         bst.to_graph().display()
         bst.delete_node(13)
+        bst.delete_node(18)
         bst.to_graph().display()
