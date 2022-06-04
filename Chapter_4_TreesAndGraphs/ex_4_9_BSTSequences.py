@@ -53,6 +53,7 @@ def bst_sequences(tree: BinaryTree):
     return sequences
 
 
+
 class TestCase(unittest.TestCase):
     def test_book(self):
         tree = BinaryTree(2)

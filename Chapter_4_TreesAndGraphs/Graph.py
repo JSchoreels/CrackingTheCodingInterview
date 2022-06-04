@@ -52,17 +52,17 @@ class Graph:
             if mark_origin_of_edge:
                 self.nodes[source][status] = True
 
-    def display(self, draw_func = lambda g: g.draw):
+    def display(self, draw_func = lambda g: g.draw, node_size=300):
         plt.clf()
         graph = nx.DiGraph(self.edges)
         pos = graphviz_layout(graph, prog="dot")
         nodes = [node for node in self.nodes if "None" not in str(node)]
         labels = {id: id for id in nodes}
-        draw_func(nx)(graph,pos, nodelist=nodes, labels=labels, node_color="tab:blue", font_color="whitesmoke")
+        draw_func(nx)(graph,pos, nodelist=nodes, node_size=node_size, font_size=9, labels=labels, node_color="tab:blue", font_color="whitesmoke")
         for color, status in [('tab:red', 'visited'),('tab:green','matched')]:
             nodes = [node for node in self.nodes if self.nodes[node].get(status)]
             edges = [ (src,dest) for src in self.edges.keys() for dest in self.edges[src].keys() if self.edges[src][dest].get(status, False)]
-            draw_func(nx)(graph, pos, nodelist=nodes, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
+            draw_func(nx)(graph, pos, nodelist=nodes, node_size=node_size, font_size=9, edgelist=edges, labels=labels, width=4, edge_color=color, node_color=color, font_color="whitesmoke")
         plt.show()
 
 
