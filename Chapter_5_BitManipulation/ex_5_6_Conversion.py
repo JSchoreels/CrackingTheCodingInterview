@@ -13,14 +13,16 @@ import unittest
 
 
 def conversion(int1, int2):
+    assert int1 >= 0 and int2 >= 0
     xor = int1 ^ int2
-    xor_split = bin(xor).split('0b')
-    sign, bits = xor_split[0], xor_split[1]
-    return sum([int(bit) for bit in bits]) + (1 if sign == "-" else 0)
+    count_1 = 0
+    while xor != 0:
+        count_1 += xor & 1
+        xor >>= 1
+    return count_1 - xor
 
 class TestCase(unittest.TestCase):
     def test(self):
         self.assertEqual(2, conversion(29, 15))
         self.assertEqual(0, conversion(1, 1))
         self.assertEqual(2, conversion(2, 16))
-        self.assertEqual(2, conversion(1, -1))
