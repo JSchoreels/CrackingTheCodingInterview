@@ -1,0 +1,22 @@
+# 5.5
+# Debugger: Explain what the following code does: ( (n & (n-1)) == 0).
+
+n & n-1 will return 0 (000000000...) if they don't have any bit in common.
+10101010
+-      1
+10101001
+
+10101001
+-      1
+10101000
+
+How to get full 0 on last line ?
+With many numbers, it won't work. When you remove one, you change the first number, so it will never be in common.
+But the second ? it will change if it was ending with 100 (it becomes 011). x will change also
+Or 000 (it becomes 111)
+Basically, it needs to end with "0000..."
+So if EVERYTHING need to be changed, then EVERYTHING should be equal to 1000... (one 1 and any number of 0 after)
+Basically, all binary number with only one bit : All power of 2 for positive.
+
+For negative, it will only work for -2**N with N the bit length size (the only one that is 10000..)
+Example in Java : Integer.MIN_VALUE & Integer.MIN_VALUE - 1
