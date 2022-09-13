@@ -20,6 +20,6 @@ def create_signature(word : str):
     return ''.join([f"{count}{chr(char)}" for (char, count) in enumerate(histo) if count>0 ])
 
 
-result = group_anagrams(["test", "testa", "tset", "testa", "testc"])
+result = group_anagrams(["test", "teast", "tset", "testa", "testc"])
 print(result)
-assert result == ['test', 'tset', 'testa', 'testa', 'testc']
+assert result == ['test', 'tset', 'teast', 'testa', 'testc']
