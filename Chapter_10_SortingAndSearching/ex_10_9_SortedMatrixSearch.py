@@ -7,8 +7,7 @@ def sorted_matrix_search(matrix, elt):
     def search(i_left_top, j_left_top, i_right_bottom, j_right_bottom):
         # print(f"Searching for {elt} in box : {i_left_top},{j_left_top} ({matrix[i_left_top][j_left_top]}) - {i_right_bottom},{j_right_bottom} ({matrix[i_right_bottom][j_right_bottom]})")
         if i_left_top < 0 or j_left_top < 0 or i_right_bottom < 0 or j_right_bottom < 0 or i_left_top > i_right_bottom or j_left_top > j_right_bottom:
-            # raise ValueError('Check the box corners')
-            return
+            raise ValueError('Check the box corners')
         i_mid = i_left_top + (i_right_bottom - i_left_top) // 2
         j_mid = j_left_top + (j_right_bottom - j_left_top) // 2
         selected_value = matrix[i_mid][j_mid]
