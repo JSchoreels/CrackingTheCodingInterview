@@ -9,3 +9,7 @@ def factorial_zero(n):
 
 for i in range(0,201):
     print(f"factorial_zero({i}):{factorial_zero(i)}")
+
+assert factorial_zero(5) == factorial_zero(4) + 1
+assert factorial_zero(25) == factorial_zero(24) + 2
+assert factorial_zero(125) == factorial_zero(124) + 3
