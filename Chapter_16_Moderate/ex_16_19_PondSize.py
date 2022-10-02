@@ -23,7 +23,7 @@ def pond_size(lands : List[List[int]]):
         size = 1
         for i_radius in range(-1,2):
             for j_radius in range(-1,2):
-                if not (i_radius == 0 and j_radius == 0) and i+i_radius < n and j+j_radius < m and i+i_radius>=0 and j+j_radius>=0 :
+                if n > i + i_radius >= 0 and m > j + j_radius >= 0:
                     if visited_lands[i+i_radius][j+j_radius] == 0:
                         size += scan_and_mark_pond(i + i_radius, j + j_radius, id)
         return size
