@@ -25,10 +25,13 @@ class Cache:
             if node != self.MRU:
                 if node == self.LRU:
                     self.LRU = node.prev
-                node.prev.next = node.next
-                node.next = self.MRU
-                node.prev = None
-                self.MRU = node
+                self.remove_node(node)
+
+    def remove_node(self, node):
+        node.prev.next = node.next
+        node.next = self.MRU
+        node.prev = None
+        self.MRU = node
 
     def put(self, data):
         if data not in {}:
@@ -48,10 +51,7 @@ class Cache:
                 self.LRU = self.LRU.prev
                 self.LRU.next = None
             elif node != self.MRU:
-                node.prev.next = node.next
-                node.next = self.MRU
-                node.prev = None
-                self.MRU = node
+                self.remove_node(node)
 
     def remove_lru(self):
         node = self.registry.pop(self.LRU.data)
